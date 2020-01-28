@@ -1078,8 +1078,11 @@ class Emitter:
             end += 1
 
     def write_plain(self, text, split=True):
-        if self.root_context:
-            self.open_ended = True
+        # XXX Hack to get this honouring `explicit_end = False`, overcomes
+        # https://github.com/yaml/pyyaml/issues/379. Should be replaced with a
+        # smarter fix eventually.
+        # if self.root_context:
+        #     self.open_ended = True
         if not text:
             return
         if not self.whitespace:
